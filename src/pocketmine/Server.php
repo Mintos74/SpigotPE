@@ -32,7 +32,7 @@ use pocketmine\command\ConsoleCommandSender;
 use pocketmine\command\PluginIdentifiableCommand;
 use pocketmine\command\SimpleCommandMap;
 use pocketmine\entity\Arrow;
-use pocketmine\entity\Attribute;
+use pocketmine\entity\Attribute;//getServerId
 use pocketmine\entity\Effect;
 use pocketmine\entity\Entity;
 use pocketmine\entity\FallingSand;
@@ -153,6 +153,8 @@ class Server{
 
 	/** @var Server */
 	private static $instance = null;
+	
+	private static $serverId =  0;
 
 	/** @var BanList */
 	private $banByName = null;
@@ -1459,7 +1461,6 @@ class Server{
 	public static function getServerId(){
 		return self::$serverId;
 	}
-	
 
 	/**
 	 * @param \ClassLoader    $autoloader
@@ -1470,6 +1471,7 @@ class Server{
 	 */
 	public function __construct(\ClassLoader $autoloader, \ThreadedLogger $logger, $filePath, $dataPath, $pluginPath){		
 		self::$instance = $this;
+		self::$serverId =  mt_rand(0, PHP_INT_MAX);
 
 		$this->autoloader = $autoloader;
 		$this->logger = $logger;
@@ -1518,9 +1520,9 @@ class Server{
 			"max-players" => 20,
 			"allow-flight" => false,
 			"spawn-animals" => true,
-			"animals-limit" => 20,
+			"animals-limit" => 0,
 			"spawn-mobs" => true,
-			"mobs-limit" => 10,
+			"mobs-limit" => 0,
 			"gamemode" => 0,
 			"force-gamemode" => false,
 			"hardcore" => false,
@@ -1534,8 +1536,8 @@ class Server{
 			"enable-rcon" => false,
 			"rcon.password" => substr(base64_encode(@Utils::getRandomBytes(20, false)), 3, 10),
 			"auto-save" => true,
-			"auto-generate" => true,
-			"save-player-data" => true,
+			"auto-generate" => false,
+			"save-player-data" => false,
 			"time-update" => true,
 			"use-encrypt" => false
 		]);
