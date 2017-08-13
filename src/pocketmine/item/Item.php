@@ -1054,7 +1054,7 @@ class Item{
 			// self::$list[self::CAMERA] = Camera::class;
             
             // update for 1.0
-			self::$list[self::CHORUS_FRUIT] = ChorusFruit::class;
+		///	self::$list[self::CHORUS_FRUIT] = ChorusFruit::class;
 
 			for($i = 0; $i < 256; ++$i){
 				if(Block::$list[$i] !== null){
