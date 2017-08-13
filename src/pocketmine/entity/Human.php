@@ -247,6 +247,18 @@ class Human extends Creature implements ProjectileSource, InventoryHolder{
 		}
 	}
 
+	 $this->namedtag->EnderChestInventory = new ListTag("EnderChestInventory", []);
+        $this->namedtag->EnderChestInventory->setTagType(NBT::TAG_Compound);
+        if($this->enderChestInventory !== null) {
+            for($slot = 0; $slot < $this->enderChestInventory->getSize(); ++$slot){
+                $item = $this->enderChestInventory->getItem($slot);
+                if($item instanceof ItemItem and $item->getId() !== ItemItem::AIR){
+                    $this->namedtag->EnderChestInventory[$slot] = $item->nbtSerialize($slot);
+                }
+            }
+        }
+	}
+	
 	public function spawnTo(Player $player){
 		if($player !== $this and !isset($this->hasSpawned[$player->getId()])  and isset($player->usedChunks[Level::chunkHash($this->chunk->getX(), $this->chunk->getZ())])){
 			$this->hasSpawned[$player->getId()] = $player;
@@ -278,19 +290,6 @@ class Human extends Creature implements ProjectileSource, InventoryHolder{
 			}
 		}
 	}
-	
-	        $this->namedtag->EnderChestInventory = new ListTag("EnderChestInventory", []);
-        $this->namedtag->EnderChestInventory->setTagType(NBT::TAG_Compound);
-        if($this->enderChestInventory !== null) {
-            for($slot = 0; $slot < $this->enderChestInventory->getSize(); ++$slot){
-                $item = $this->enderChestInventory->getItem($slot);
-                if($item instanceof ItemItem and $item->getId() !== ItemItem::AIR){
-                    $this->namedtag->EnderChestInventory[$slot] = $item->nbtSerialize($slot);
-                }
-            }
-        }
-	}
-
 
 	public function despawnFrom(Player $player){
 		if(isset($this->hasSpawned[$player->getId()])){
