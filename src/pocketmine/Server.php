@@ -32,7 +32,7 @@ use pocketmine\command\ConsoleCommandSender;
 use pocketmine\command\PluginIdentifiableCommand;
 use pocketmine\command\SimpleCommandMap;
 use pocketmine\entity\Arrow;
-use pocketmine\entity\Attribute;//getServerId
+use pocketmine\entity\Attribute;
 use pocketmine\entity\Effect;
 use pocketmine\entity\Entity;
 use pocketmine\entity\FallingSand;
@@ -1537,7 +1537,7 @@ class Server{
 			"rcon.password" => substr(base64_encode(@Utils::getRandomBytes(20, false)), 3, 10),
 			"auto-save" => true,
 			"auto-generate" => false,
-			"save-player-data" => false,
+			"save-player-data" => true,
 			"time-update" => true,
 			"use-encrypt" => false
 		]);
