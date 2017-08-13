@@ -246,27 +246,6 @@ class Human extends Creature implements ProjectileSource, InventoryHolder{
 			}
 		}
 	}
-				$this->namedtag->SelectedInventorySlot = new IntTag("SelectedInventorySlot", $this->inventory->getHeldItemIndex());
-		}
-
-		if(strlen($this->getSkinData()) > 0){
-			$this->namedtag->Skin = new CompoundTag("Skin", [
-				new StringTag("Data", $this->getSkinData()),
-				new StringTag("Name", $this->getSkinId())
-			]);
-		}
-
-        $this->namedtag->EnderChestInventory = new ListTag("EnderChestInventory", []);
-        $this->namedtag->EnderChestInventory->setTagType(NBT::TAG_Compound);
-        if($this->enderChestInventory !== null) {
-            for($slot = 0; $slot < $this->enderChestInventory->getSize(); ++$slot){
-                $item = $this->enderChestInventory->getItem($slot);
-                if($item instanceof ItemItem and $item->getId() !== ItemItem::AIR){
-                    $this->namedtag->EnderChestInventory[$slot] = $item->nbtSerialize($slot);
-                }
-            }
-        }
-	}
 	
 	public function spawnTo(Player $player){
 		if($player !== $this and !isset($this->hasSpawned[$player->getId()])  and isset($player->usedChunks[Level::chunkHash($this->chunk->getX(), $this->chunk->getZ())])){
