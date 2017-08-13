@@ -1455,6 +1455,11 @@ class Server{
 	public static function getInstance(){
 		return self::$instance;
 	}
+	
+	public static function getServerId(){
+		return self::$serverId;
+	}
+	
 
 	/**
 	 * @param \ClassLoader    $autoloader
