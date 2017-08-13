@@ -2567,7 +2567,7 @@ class Server{
 		Tile::registerTile(EnchantTable::class);
 		Tile::registerTile(Skull::class);
 		Tile::registerTile(FlowerPot::class);
-        Tile::registerTile(EnderChest::class);
+       // Tile::registerTile(EnderChest::class);
 		Tile::registerTile(Bed::class);
 		Tile::registerTile(Cauldron::class);
 	}
